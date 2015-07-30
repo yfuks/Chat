@@ -30,7 +30,6 @@ io.on('connection', function(socket){
   		me = usr;
     	console.log('New User: ' + usr);
 	    io.emit('login', usr);
-	    io.emit('newusr', usr);
 	    users.push(usr);
 	    console.log(users);
 	}
