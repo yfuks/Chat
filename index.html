@@ -9,15 +9,16 @@
 		<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
 		<link href='http://fonts.googleapis.com/css?family=Varela+Round' rel='stylesheet' type='text/css'>
 	</head>
-	<script src="/socket.io/socket.io.js"></script>
+	<script src="https://cdn.socket.io/socket.io-1.2.0.js"></script>
+	<script src="https://code.jquery.com/jquery-1.10.2.js"></script>
 	<script>
-	  var socket = io();
+  	var socket = io();
 	</script>
 	<body>
-	<div class="text-center" style="padding:50px 0">
+	<div class="text-center" style="padding:50px 0" id="Form">
 		<div class="logo">login</div>
 		<div class="login-form-1">
-			<form id="login-form" class="text-left">
+			<div id="login-form" class="text-left">
 				<div class="login-form-main-message"></div>
 				<div class="main-login-form">
 					<div class="login-group">
@@ -30,10 +31,20 @@
 							<label for="lg_remember">remember</label>
 						</div>
 					</div>
-					<button type="submit" class="login-button"><i class="fa fa-chevron-right"></i></button>
+					<button class="login-button" id="button"><i class="fa fa-chevron-right"></i></button>
 				</div>
+			</div>
 			</form>
 		</div>
 	</div>
+	<script type="text/javascript" >
+	$('#button').click(function(){
+		if ($('#lg_username').val() == '')
+			return false;
+  	  socket.emit('newusr', $('#lg_username').val());
+  	  $('#Form').remove();
+  	  $('body').append("<center><div class=\"text-center login-form1\"><div class=\"chat\"><div class=\"chat-title\">Chat</div><div class=\"chat-body\"></div><div class=\"chat-footer\"><input typde=\"text\"></input><div class=\"chat-send\">Send</div></div></div></div></center>");
+ 	 });
+ 	 </script>
 	</body>
 </html>

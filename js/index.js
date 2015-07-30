@@ -9,10 +9,16 @@ app.get('/', function(req, res){
 	res.sendFile(path.join(__dirname, '..', 'index.html'));
 });
 
-io.on('connection', function(socket){
+/*io.on('connection', function(socket){
   console.log('a user connected');
   socket.on('disconnect', function(){
     console.log('user disconnected');
+  });
+});*/
+
+io.on('connection', function(socket){
+  socket.on('newusr', function(msg){
+    console.log('New User: ' + msg);
   });
 });
 
