@@ -2,7 +2,7 @@
 <html lang="en">
 	<head>
 		<meta charset="utf-8">
-		<title>Chat</title>
+		<title>Login</title>
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<link href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
 		<link rel="stylesheet" href="css/chat.css">
@@ -42,9 +42,8 @@
 		if ($('#lg_username').val() == '')
 			return false;
   	  socket.emit('newusr', $('#lg_username').val());
-  	  $('#Form').remove();
-  	  $('body').append("<center><div class=\"text-center login-form1\"><div class=\"chat\"><div class=\"chat-title\">Chat</div><div class=\"chat-body\"></div><div class=\"chat-footer\"><input typde=\"text\"></input><div class=\"chat-send\">Send</div></div></div></div></center>");
- 	 });
+  	  document.location.href="chat.html";
+  	});
  	 </script>
 	</body>
 </html>
