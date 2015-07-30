@@ -15,14 +15,14 @@
   	var socket = io();
 	</script>
 	<body>
-	<div class="text-center" style="padding:50px 0" id="Form">
+	<div class="text-center container1" id="Form">
 		<div class="logo">login</div>
 		<div class="login-form-1">
 			<div id="login-form" class="text-left">
 				<div class="login-form-main-message"></div>
 				<div class="main-login-form">
 					<div class="login-group">
-						<div class="form-group">
+						<div class="form-group error-msg">
 							<label for="lg_username" class="sr-only">Username</label>
 							<input type="text" class="form-control" id="lg_username" name="lg_username" placeholder="username">
 						</div>
@@ -37,12 +37,48 @@
 			</form>
 		</div>
 	</div>
+	<div class="text-center login-form1 container2">
+		<div class="Users">
+			<div class="Users-title">Users Online</div>
+			<div class="Users-body"></div>
+		</div>
+		<div class="chat">
+			<div class="chat-title">Chat</div>
+			<div class="chat-body"></div>
+			<div class="chat-footer">
+				<div class="chat-send">SEND</div>
+				<input typde="text" id="mssg"></input>
+			</div>
+		</div>
+	</div>
 	<script type="text/javascript" >
 	$('#button').click(function(){
 		if ($('#lg_username').val() == '')
 			return false;
+		$('h6').remove();
   	  socket.emit('newusr', $('#lg_username').val());
-  	  document.location.href="chat.html";
+  	  });
+  	  
+  	  socket.on('errorlog', function(){
+    	$('.error-msg').append("<h6>Login allready taken</h6>");
+  		});
+  	  socket.on('login', function(msg){
+  	  	if (msg == $('#lg_username').val())
+  	  	{
+  	  		$('.container1').fadeOut(300, function(){ $(this).remove();});
+  	  	}
+  	  	$('.Users-body').append("<div class=\"cell\">" + msg + "</div>");
+  	});
+  	  $('.chat-send').click(function(){
+		if ($('#mssg').val() == '')
+			return false;
+  	  
+  	  socket.emit('newmsg', $('#mssg').val());
+  	  $('#mssg').val('');
+  	});
+  	
+  	socket.on('newmsg', function(msg){
+    $('.chat-body').append("<div class=\"cell\">" + msg + "</div>");
   	});
  	 </script>
 	</body>
