@@ -15,6 +15,10 @@ io.on('connection', function(socket){
   socket.on('newusr', function(usr){
     console.log('New User: ' + usr);
     io.emit('newusr', usr);
+    users.push(usr);
+  });
+  socket.on('newmsg', function(msg){
+  	io.emit('newmsg', msg);
   });
 });
 
