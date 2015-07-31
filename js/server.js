@@ -5,6 +5,7 @@ var io = require('socket.io')(http);
 
 var	users = [];
 
+/* The serv send the index.html when it connect */
 app.use(express.static(__dirname + '/../'));
 app.get('/', function(req, res){
 	var path = require("path");
@@ -13,10 +14,12 @@ app.get('/', function(req, res){
 
 io.on('connection', function(socket){
   var me = "";
+  /* Send all the users allready connected when the user arrive to the page */
   for (var k in users)
   {
     io.emit('login', users[k]);
   }
+  /* Check if the client who try to connecton don't allready exist*/
   socket.on('newusr', function(usr){
   	var	found = false;
 
@@ -34,7 +37,6 @@ io.on('connection', function(socket){
     	console.log('New User: ' + usr);
 	    io.emit('login', usr);
 	    users.push(usr);
-	    console.log(users);
 	}
   });
 

@@ -288,6 +288,7 @@ float: right;
 
 .chat-body, .Users-body {
   overflow: auto;
+  height: calc(100% - 56px);
 }
 
 .chat-footer {
@@ -351,4 +352,9 @@ float: right;
   -moz-border-radius: 2px;
   -webkit-border-radius: 2px;
   border-radius: 2px;
+  -moz-hyphens:auto;
+  -ms-hyphens:auto;
+  -webkit-hyphens:auto;
+  hyphens:auto;
+  word-wrap:break-word;
 }
