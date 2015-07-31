@@ -11,6 +11,7 @@
 	</head>
 	<script src="https://cdn.socket.io/socket.io-1.2.0.js"></script>
 	<script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+	<script src="js/jquery.cookie.js"></script>
 	<script>
   	var socket = io();
 	</script>
@@ -51,35 +52,6 @@
 			</div>
 		</div>
 	</div>
-	<script type="text/javascript" >
-	$('#button').click(function(){
-		if ($('#lg_username').val() == '')
-			return false;
-		$('h6').remove();
-  	  socket.emit('newusr', $('#lg_username').val());
-  	  });
-  	  
-  	  socket.on('errorlog', function(){
-    	$('.error-msg').append("<h6>Login allready taken</h6>");
-  		});
-  	  socket.on('login', function(msg){
-  	  	if (msg == $('#lg_username').val())
-  	  	{
-  	  		$('.container1').fadeOut(300, function(){ $(this).remove();});
-  	  	}
-  	  	$('.Users-body').append("<div class=\"cell\">" + msg + "</div>");
-  	});
-  	  $('.chat-send').click(function(){
-		if ($('#mssg').val() == '')
-			return false;
-  	  
-  	  socket.emit('newmsg', $('#mssg').val());
-  	  $('#mssg').val('');
-  	});
-  	
-  	socket.on('newmsg', function(msg){
-    $('.chat-body').append("<div class=\"cell\">" + msg + "</div>");
-  	});
- 	 </script>
+	<script src="js/client.js"></script>
 	</body>
 </html>

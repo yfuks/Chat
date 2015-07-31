@@ -4,7 +4,6 @@ var http = require('http').Server(app);
 var io = require('socket.io')(http);
 
 var	users = [];
-var	me = "";
 
 app.use(express.static(__dirname + '/../'));
 app.get('/', function(req, res){
@@ -13,8 +12,8 @@ app.get('/', function(req, res){
 });
 
 io.on('connection', function(socket){
+  var me = "";
   socket.on('newusr', function(usr){
-
   	var	found = false;
 
   	for (var k in users) 
@@ -27,7 +26,7 @@ io.on('connection', function(socket){
   	}
   	if (found == false)
   	{
-  		me = usr;
+      me = usr;
     	console.log('New User: ' + usr);
 	    io.emit('login', usr);
 	    users.push(usr);
@@ -39,11 +38,14 @@ io.on('connection', function(socket){
   	io.emit('newmsg', msg);
   });
 
-  socket.on('quit', function() {
-  	delete users[me];
-	console.log(users);
+  socket.on('disconnect', function(){
+    if (me)
+    {
+      users.splice(users.indexOf(me),1);
+      io.emit('usrdeco', me);
+      console.log("User disconnect: " + me);
+    }
   });
-
 });
 
 http.listen(3000, function(){
