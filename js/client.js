@@ -1,3 +1,6 @@
+
+/* This .js handle all the callback for the client */
+/* Create the 29 jully 2015 by Yoann Fuks */
 $('#button').click(function(){
 		if ($('#lg_username').val() == '')
 			return false;
@@ -15,7 +18,10 @@ socket.on('login', function(usr){
       $('.container1').fadeOut(300, function(){ $(this).remove();});
       $.cookie('chat', usr);
     }
-  	$('.Users-body').append("<div class=\"cell\" id=\"" + usr + "\">" + usr + "</div>");
+  	if (!document.getElementById(usr))
+    {
+      $('.Users-body').append("<div class=\"cell\" id=\"" + usr + "\">" + usr + "</div>");
+    }
 });
   	  
 $('.chat-send').click(function(){
@@ -27,7 +33,7 @@ if ($('#mssg').val() == '')
 });
 
 socket.on('newmsg', function(msg){
-$('.chat-body').append("<div class=\"cell\">" + msg + "</div>");
+$('.chat-body').append("<p>" + msg + "</p>");
 });
 
 socket.on('usrdeco', function(usr){

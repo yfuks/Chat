@@ -13,6 +13,10 @@ app.get('/', function(req, res){
 
 io.on('connection', function(socket){
   var me = "";
+  for (var k in users)
+  {
+    io.emit('login', users[k]);
+  }
   socket.on('newusr', function(usr){
   	var	found = false;
 
@@ -35,7 +39,7 @@ io.on('connection', function(socket){
   });
 
   socket.on('newmsg', function(msg){
-  	io.emit('newmsg', msg);
+  	io.emit('newmsg', me + ": " + msg);
   });
 
   socket.on('disconnect', function(){
