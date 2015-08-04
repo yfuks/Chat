@@ -54,14 +54,6 @@ a:hover {
   font-weight: bold;
   height:auto;
 }
-.login-form-1 .form-control::-webkit-input-placeholder {
-  color: #999999;
-}
-.login-form-1 .form-control:-moz-placeholder,
-.login-form-1 .form-control::-moz-placeholder,
-.login-form-1 .form-control:-ms-input-placeholder {
-  color: #999999;
-}
 .login-form-1 .form-group {
   margin-bottom: 0;
   border-bottom: 2px solid #efefef;
@@ -100,17 +92,8 @@ a:hover {
   color: #555555;
   transform: rotate(450deg);
 }
-.login-form-1 .login-button.clicked {
-  color: #555555;
-}
 .login-form-1 .login-button.clicked:hover {
   transform: none;
-}
-.login-form-1 .login-button.clicked.success {
-  color: #2ecc71;
-}
-.login-form-1 .login-button.clicked.error {
-  color: #e74c3c;
 }
 /*=== 8. Custom Checkbox & Radio ===*/
 /* Base for label styling */
@@ -161,34 +144,10 @@ a:hover {
   opacity: 0;
   transform: scale(0);
 }
-[type="checkbox"]:checked + label:after,
-[type="radio"]:checked + label:after {
-  opacity: 1;
-  transform: scale(1);
-}
-/* disabled checkbox */
-[type="checkbox"]:disabled:not(:checked) + label:before,
-[type="checkbox"]:disabled:checked + label:before,
-[type="radio"]:disabled:not(:checked) + label:before,
-[type="radio"]:disabled:checked + label:before {
-  box-shadow: none;
-  border-color: #8c8c8c;
-  background-color: #878787;
-}
-[type="checkbox"]:disabled:checked + label:after,
-[type="radio"]:disabled:checked + label:after {
-  color: #555555;
-}
+
 [type="checkbox"]:disabled + label,
 [type="radio"]:disabled + label {
   color: #8c8c8c;
-}
-/* accessibility */
-[type="checkbox"]:checked:focus + label:before,
-[type="checkbox"]:not(:checked):focus + label:before,
-[type="checkbox"]:checked:focus + label:before,
-[type="checkbox"]:not(:checked):focus + label:before {
-  border: 1px dotted #f6f6f6;
 }
 /* hover style just for information */
 label:hover:before {
@@ -199,10 +158,6 @@ label:hover:before {
 [type="checkbox"]:not(:checked) + label:before,
 [type="checkbox"]:checked + label:before {
   border-radius: 3px;
-}
-[type="radio"]:not(:checked) + label:before,
-[type="radio"]:checked + label:before {
-  border-radius: 35px;
 }
 /* selected mark aspect */
 [type="checkbox"]:not(:checked) + label:after,
