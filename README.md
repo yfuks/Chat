@@ -1,7 +1,7 @@
 # Chat
 
 ##Intall
-`npm install`
+`$> npm install`
 
 ##Start
-`npm start`
+`$> npm start`
