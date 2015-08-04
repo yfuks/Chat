@@ -44,7 +44,12 @@ io.on('connection', function(socket){
   });
 
   socket.on('newmsg', function(msg){
-  	io.emit('newmsg', "<div class=\"sender\">" + me + "</div><b><span class=\"glyphicon glyphicon-chevron-right btn-xs\"></span></b> " + msg);
+    if (msg == "/scramble")
+    {
+      io.emit('newmsg', "<div class=\"sender\">[SCRAMBLE]</div> Nouvelle partie par @" + me + ": LETTRESDUMOTADEVINER");
+    }
+    else
+    	io.emit('newmsg', "<div class=\"sender\">" + me + "</div><b><span class=\"glyphicon glyphicon-chevron-right btn-xs\"></span></b> " + msg);
   });
 
   socket.on('disconnect', function(){
