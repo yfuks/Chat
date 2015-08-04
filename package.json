@@ -9,5 +9,15 @@
   },
   "scripts" : {
   	"start" : "node js/server.js"
-  }
+  },
+  "repository" : {
+  	"type" : "git",
+  	"url" : "https://github.com/yfuks/Chat"
+  },
+  "keywords" : [
+  	"chat",
+  	"socket.io",
+  	"express.js"
+  ],
+  "license" : "MIT"
 }
