@@ -14,6 +14,8 @@ app.get('/', function(req, res){
 
 io.on('connection', function(socket){
   var me = "";
+
+  io.emit('connect');
   /* Send all the users allready connected when the user arrive to the page */
   for (var k in users)
   {
@@ -50,7 +52,14 @@ io.on('connection', function(socket){
       users.splice(users.indexOf(me),1);
       io.emit('usrdeco', me);
       console.log("User disconnect: " + me);
+      me = "";
     }
+  });
+
+  socket.on('usrdeco', function(usr){
+    io.emit('usrdeco', usr);
+    users.splice(users.indexOf(usr),1);
+    console.log("User disconnect: " + usr);
   });
 });
 
