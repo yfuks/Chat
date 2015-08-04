@@ -1,0 +1,13 @@
+{
+  "name": "chat-yfuks",
+  "version": "0.0.1",
+  "description": "my first socket.io app",
+  "author": "Yoann Fuks <yfuks@student.42.fr>",
+  "dependencies": {
+  	"express" : "4.x" ,
+  	"socket.io" : "*"
+  },
+  "scripts" : {
+  	"start" : "node js/server.js"
+  }
+}
