@@ -328,3 +328,11 @@ float: right;
   float: right;
   color: #C2C9C1;
 }
+
+.exit {
+  float: right;
+}
+
+.exit:hover {
+  color: #FFF;
+}
