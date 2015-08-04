@@ -5,6 +5,7 @@
 
 var me = "";
 
+/* this function is for automatic connection when the user login*/
 socket.on('connect', function() {
   if ($.cookie('chat'))
     socket.emit('newusr', $.cookie('chat'));
@@ -36,6 +37,7 @@ socket.on('login', function(usr){
     }
     else if (usr == $.cookie('chat'))
     {
+      me = usr;
       $('.container1').hide();
     }
     // If the user isn't allready print
@@ -43,11 +45,11 @@ socket.on('login', function(usr){
     {
       if ($.cookie('chat') === usr || me == usr)
       {
-        $('.Users-body').append("<div class=\"cell\" id=\"" + usr + "\" style=\"color:red\">" + usr + "</div>");
+        $('.Users-body').append("<div class=\"cell\" id=\"" + usr + "\">" + usr + "</div>");
       }
       else
       {
-        $('.Users-body').append("<div class=\"cell\" id=\"" + usr + "\">" + usr + "</div>");
+        $('.Users-body').append("<div class=\"cell\" id=\"" + usr + "\" style=\"color:#C2C9C1\">" + usr + "</div>");
       }
     }
 });
@@ -63,8 +65,10 @@ if ($('#mssg').val() == '')
 
 /* This function handle exit */
 $('.exit').click(function(){
-    socket.emit('usrdeco', $.cookie('chat'));
-  $.removeCookie('chat');
+  socket.emit('usrdeco', me);
+  if ($.cookie('chat'))
+    $.removeCookie('chat');
+  $('#lg_remember').prop("checked", false);
   $('.container1').show();
 });
 
@@ -79,6 +83,20 @@ $('#mssg').keyup(function (e) {
   if (key == 27)//Esc
   {
     $('#mssg').val('');
+  }
+});
+
+$('#lg_username').keyup(function (e) {
+  var key = e.which;
+  if(key == 13)//Enter
+  {
+    $('#button').trigger('click');
+    return false;
+  }
+  if (key == 27)//Esc
+  {
+    $('#lg_username').val('');
+    $('#lg_remember').prop("checked", false);
   }
 });
 

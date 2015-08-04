@@ -3,6 +3,7 @@ var app = express();
 var http = require('http').Server(app);
 var io = require('socket.io')(http);
 
+/* List of user */
 var	users = [];
 
 /* The serv send the index.html when it connect */
@@ -43,7 +44,7 @@ io.on('connection', function(socket){
   });
 
   socket.on('newmsg', function(msg){
-  	io.emit('newmsg', "<div class=\"sender\">" + me + ":</div>" + msg);
+  	io.emit('newmsg', "<div class=\"sender\">" + me + "</div><b><span class=\"glyphicon glyphicon-chevron-right btn-xs\"></span></b> " + msg);
   });
 
   socket.on('disconnect', function(){

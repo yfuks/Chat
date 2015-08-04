@@ -318,10 +318,11 @@ float: right;
   -ms-hyphens:auto;
   -webkit-hyphens:auto;
   hyphens:auto;
+  font-size: 13px;
 }
 
 .sender {
-  font-size: 20px;
+  font-size: 17px;
 }
 
 .time {
@@ -335,4 +336,5 @@ float: right;
 
 .exit:hover {
   color: #FFF;
+  cursor:pointer;
 }
