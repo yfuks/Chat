@@ -64,7 +64,11 @@ $('#mssg').keyup(function (e) {
 
 /* This function handle when a new msg arrive from the serv */
 socket.on('newmsg', function(msg){
-$('.chat-body').append("<p>" + msg + "</p>");
+  var d = new Date();
+  d.setTime( d.getTime() - d.getTimezoneOffset()*60*1000);
+  var h = d.getUTCHours();
+  var m = d.getUTCMinutes();
+$('.chat-body').append("<div class=\"cell\"><div class=\"time\">" + h + ":" + m + "</div><div class=\"msg\">" + msg + "</div></div>");
 });
 
 /* This function remove a user from the list when the client receive the usrdeco*/

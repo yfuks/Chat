@@ -252,11 +252,12 @@ label:hover:before {
   height: 80vh;
   background-color: #FFF;
   border-radius: 4px;
-  border-color: #428bca;
   font-size: 14px;
   line-height: 1.428571429;
-  border: 1px solid;
-  border-color: #428bca;
+  border-left: 1px solid;
+  border-top: 1px solid;
+  border-bottom: 1px solid;
+  border-color: #d9edf7;
   position: relative;
 }
 
@@ -268,29 +269,24 @@ float: right;
   margin-left: auto;
   margin-right: auto;
   border-radius: 4px;
-  border-color: #428bca;
   font-size: 14px;
   line-height: 1.428571429;
-  border: 1px solid;
-  border-color: #428bca;
-}
-.chat-title, .Users-title {
-  background-color: #428bca;
-  border-color: #428bca;
-  padding: 10px 15px;
-  border-bottom: 1px solid transparent;
-  border-top-right-radius: 3px;
-  border-top-left-radius: 3px;
-  color: #FFF;
-  text-align: left;
-  font-size: 22px;
+/*  border: 1px solid;*/
+  border-right: 1px solid;
+  border-bottom: 1px solid;
+  border-top: 1px solid;  
+  border-color: #d9edf7;
 }
 
-.chat-body, .Users-body {
+.Users-body {
   overflow: auto;
-  height: calc(100% - 56px);
+  height: calc(100% - 17px);
 }
 
+.chat-body {
+  overflow: auto;
+  height: calc(100% - 17px - 60px);
+}
 .chat-footer {
   position: absolute;
   bottom: 0.1px;
@@ -357,4 +353,23 @@ float: right;
   -webkit-hyphens:auto;
   hyphens:auto;
   word-wrap:break-word;
+}
+
+.msg {
+  -moz-border-radius: 2px;
+  -webkit-border-radius: 2px;
+  border-radius: 2px;
+  -moz-hyphens:auto;
+  -ms-hyphens:auto;
+  -webkit-hyphens:auto;
+  hyphens:auto;
+}
+
+.sender {
+  font-size: 20px;
+}
+
+.time {
+  float: right;
+  color: #C2C9C1;
 }

@@ -41,7 +41,7 @@ io.on('connection', function(socket){
   });
 
   socket.on('newmsg', function(msg){
-  	io.emit('newmsg', me + ": " + msg);
+  	io.emit('newmsg', "<div class=\"sender\">" + me + ":</div>" + msg);
   });
 
   socket.on('disconnect', function(){
