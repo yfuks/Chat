@@ -1,6 +1,6 @@
 # Chat
 
-This chat is a simple javascript project
+This chat is a tiny javascript project using socket
 
 ##Configuration
 ####Clone this project into your VirtualHost directory
