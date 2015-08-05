@@ -2,7 +2,7 @@
 
 This chat is a simple javascript project
 
-####Configuration
+##Configuration
 git clone this project into your VirtualHost directory
 
 #####Exemples:
