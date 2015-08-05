@@ -3,7 +3,7 @@
 This chat is a simple javascript project
 
 ##Configuration
-git clone this project into your VirtualHost directory
+####Clone this project into your VirtualHost directory
 
 #####Exemples:
 - `cd wamp/ && git clone https://github.com/yfuks/Chat.git www && cd www`
