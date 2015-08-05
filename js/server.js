@@ -50,7 +50,6 @@ fs.readFile(__dirname + '/../resources/HighScore.txt', 'utf8', function (err, da
   {
     Scores.push(tmp[i].split(':'));
   }
-  console.log(Scores);
 });
 
 /* This function handle when a client connect to the serv */
@@ -135,14 +134,29 @@ io.on('connection', function(socket){
       }
       if (!foundMe)
         Scores.push([me, "1"]);
+      var text = "";
+      for (var i = 0; i < Scores.length; i++) {
+        text += Scores[i][0] + ":" + Scores[i][1];
+        if (i < Scores.length - 1)
+          text += "\n";
+      }
+      fs.writeFile('resources/HighScore.txt', text, function (err) {
+        if (err) 
+          throw err;
+      });
+      var MsgScore = "<div class=\"sender\" style=\"color:red\">[SCRAMBLE - SCORES]</div>";
+      for (var i = 0; i < Scores.length; i++) {
+        MsgScore += "<div class=\"score\">" + Scores[i][0] + " : <span style=\"color:blue\">" + Scores[i][1] + "</span></div>";
+      };
+      io.emit('errorcmd', MsgScore);
     }
     else if (msg == "/scramble")
       socket.emit('errorcmd', "<div class=\"sender\" style=\"color:red\">[SCRAMBLE]</div> Partie en cours, mot à trouver : <span style=\"color:blue\">" + word_fk_up + "</span>");
     else if (msg == "/score")
     {
-      var MsgScore = "<div class=\"sender\" style=\"color:red\">[SCRAMBLE - SCORE]</div>";
+      var MsgScore = "<div class=\"sender\" style=\"color:red\">[SCRAMBLE - SCORES]</div>";
       for (var i = 0; i < Scores.length; i++) {
-        MsgScore += "<div class=\"score\">" + Scores[i][0] + " : " + Scores[i][1] + "</div>";
+        MsgScore += "<div class=\"score\">" + Scores[i][0] + " : <span style=\"color:blue\">" + Scores[i][1] + "</span></div>";
       };
       socket.emit('errorcmd', MsgScore);
     }
