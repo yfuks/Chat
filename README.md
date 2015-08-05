@@ -19,3 +19,7 @@ This chat is a tiny javascript project using socket
 #####Exemples:
 - http://localhost:3000
 - http://MyVirtualHost:3000
+
+##Command
+/scramble
+/score
