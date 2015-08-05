@@ -26,8 +26,8 @@ socket.on('errorlog', function(){
   $('.error-msg').append("<h6>Login allready taken</h6>");
 });
 
-/* When a error with the command arrive */
-socket.on('errorcmd', function(msg){
+/* When the serv send a message */
+socket.on('servmsg', function(msg){
   $('.chat-body').append("<div class=\"cell\"><div class=\"msg\">" + msg + "</div></div>");
 
 /* Scroll to the botton of the div */

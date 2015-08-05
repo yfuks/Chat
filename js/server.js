@@ -115,7 +115,7 @@ io.on('connection', function(socket){
     {
       var foundMe = false;
 
-      /* Send the victory message, end the game and remove the game-loosing callback */
+      /* Send the victory message, end the game, remove the game-loosing callback and update the HighScores*/
       scramble = false;
       io.emit('newmsg', "<div class=\"sender\" style=\"color:red\">[SCRAMBLE]</div> Partie terminée, remportée par @<span style=\"color:red\">" + me + "</span>: <span style=\"color:blue\">" + word_to_find + "</span>");
       clearTimeout(TimeOut);
@@ -134,6 +134,8 @@ io.on('connection', function(socket){
       }
       if (!foundMe)
         Scores.push([me, "1"]);
+
+      /* Save new HighScores in the file */
       var text = "";
       for (var i = 0; i < Scores.length; i++) {
         text += Scores[i][0] + ":" + Scores[i][1];
@@ -148,20 +150,20 @@ io.on('connection', function(socket){
       for (var i = 0; i < Scores.length; i++) {
         MsgScore += "<div class=\"score\">" + Scores[i][0] + " : <span style=\"color:blue\">" + Scores[i][1] + "</span></div>";
       };
-      io.emit('errorcmd', MsgScore);
+      io.emit('servmsg', MsgScore);
     }
     else if (msg == "/scramble")
-      socket.emit('errorcmd', "<div class=\"sender\" style=\"color:red\">[SCRAMBLE]</div> Partie en cours, mot à trouver : <span style=\"color:blue\">" + word_fk_up + "</span>");
+      socket.emit('servmsg', "<div class=\"sender\" style=\"color:red\">[SCRAMBLE]</div> Partie en cours, mot à trouver : <span style=\"color:blue\">" + word_fk_up + "</span>");
     else if (msg == "/score")
     {
       var MsgScore = "<div class=\"sender\" style=\"color:red\">[SCRAMBLE - SCORES]</div>";
       for (var i = 0; i < Scores.length; i++) {
         MsgScore += "<div class=\"score\">" + Scores[i][0] + " : <span style=\"color:blue\">" + Scores[i][1] + "</span></div>";
       };
-      socket.emit('errorcmd', MsgScore);
+      socket.emit('servmsg', MsgScore);
     }
     else if (msg[0] == '/')
-      socket.emit('errorcmd', "<div class=\"sender\" style=\"color:red\">[SERVER]</div> Command unknow : <span style=\"color:blue\">" + msg + "</span>");
+      socket.emit('servmsg', "<div class=\"sender\" style=\"color:red\">[SERVER]</div> Command unknow : <span style=\"color:blue\">" + msg + "</span>");
     else if (scramble && msg.trim().indexOf(' ') < 0 && msg.trim().length == word_to_find.length)
       io.emit('newmsg', "<div class=\"sender\">" + me + "</div><b><span class=\"glyphicon glyphicon-chevron-right btn-xs\"></span></b><span style=\"color:green\">" + msg + "</span>");
     else
