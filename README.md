@@ -20,6 +20,6 @@ This chat is a tiny javascript project using socket
 - http://localhost:3000
 - http://MyVirtualHost:3000
 
-##Command
+##Commands
 - /scramble
 - /score
