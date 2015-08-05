@@ -21,5 +21,5 @@ This chat is a tiny javascript project using socket
 - http://MyVirtualHost:3000
 
 ##Command
-/scramble
-/score
+- /scramble
+- /score
