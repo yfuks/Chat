@@ -21,6 +21,9 @@ var Words = [];
 var word_to_find = "";
 var word_fk_up = "";
 
+/* List of scores */
+var Scores = [];
+
 /* TimeOut for the max time of a scramble game */
 var TimeOut;
 
@@ -36,6 +39,18 @@ fs.readFile(__dirname + '/../resources/words.txt', 'utf8', function (err, data) 
   if (err)
     throw err;
   Words = data.split('\n');
+});
+
+/* Load all the scores for the scramble game */
+fs.readFile(__dirname + '/../resources/HighScore.txt', 'utf8', function (err, data) {
+  if (err)
+    throw err;
+  var tmp = data.split('\n');
+  for (var i = 0; i < tmp.length; i++)
+  {
+    Scores.push(tmp[i].split(':'));
+  }
+  console.log(Scores);
 });
 
 /* This function handle when a client connect to the serv */
@@ -99,19 +114,51 @@ io.on('connection', function(socket){
     }
     else if (scramble && removeDiacritics(msg).toLowerCase().trim() == word_to_find.toLowerCase())
     {
+      var foundMe = false;
+
       /* Send the victory message, end the game and remove the game-loosing callback */
       scramble = false;
       io.emit('newmsg', "<div class=\"sender\" style=\"color:red\">[SCRAMBLE]</div> Partie terminée, remportée par @<span style=\"color:red\">" + me + "</span>: <span style=\"color:blue\">" + word_to_find + "</span>");
       clearTimeout(TimeOut);
+      for (var i = 0; i < Scores.length; i++) {
+        if (i > 0 && parseInt(Scores[i][1]) > parseInt(Scores[i - 1][1]))
+        {
+          console.log("swap");
+          var tmp = Scores[i];
+          Scores[i] = Scores[i - 1];
+          Scores[i - 1] = tmp;
+        }
+        if (Scores[i][0] == me)
+        {
+          Scores[i][1] = (parseInt(Scores[i][1]) + 1);
+          foundMe = true;
+          for (var j = i; j > 0 && parseInt(Scores[j][1]) > parseInt(Scores[j - 1][1]); j--)
+          {
+            var tmp = Scores[j];
+            Scores[j] = Scores[j - 1];
+            Scores[j - 1] = tmp;
+          }
+        }
+      }
+      if (!foundMe)
+        Scores.push([me, "1"]);
     }
     else if (msg == "/scramble")
       socket.emit('errorcmd', "<div class=\"sender\" style=\"color:red\">[SCRAMBLE]</div> Partie en cours, mot à trouver : <span style=\"color:blue\">" + word_fk_up + "</span>");
+    else if (msg == "/score")
+    {
+      var MsgScore = "<div class=\"sender\" style=\"color:red\">[SCRAMBLE - SCORE]</div>";
+      for (var i = 0; i < Scores.length; i++) {
+        MsgScore += "<div class=\"score\">" + Scores[i][0] + " : " + Scores[i][1] + "</div>";
+      };
+      socket.emit('errorcmd', MsgScore);
+    }
     else if (msg[0] == '/')
       socket.emit('errorcmd', "<div class=\"sender\" style=\"color:red\">[SERVEUR]</div> Command unknow : <span style=\"color:blue\">" + msg + "</span>");
     else if (scramble && msg.trim().indexOf(' ') < 0 && msg.trim().length == word_to_find.length)
       io.emit('newmsg', "<div class=\"sender\">" + me + "</div><b><span class=\"glyphicon glyphicon-chevron-right btn-xs\"></span></b><span style=\"color:green\">" + msg + "</span>");
     else
-      io.emit('newmsg', "<div class=\"sender\">" + me + "</div><b><span class=\"glyphicon glyphicon-chevron-right btn-xs\"></span></b> " + msg);
+      io.emit('newmsg', "<div class=\"sender\">" + me + "</div><b><span class=\"glyphicon glyphicon-chevron-right btn-xs\"></span></b> " + msg);      
   });
 
   /* When the user diconnect from the serv */

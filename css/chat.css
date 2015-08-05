@@ -338,3 +338,7 @@ float: right;
   color: #FFF;
   cursor:pointer;
 }
+
+.score {
+  color: blue;
+}
