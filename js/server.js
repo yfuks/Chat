@@ -121,13 +121,6 @@ io.on('connection', function(socket){
       io.emit('newmsg', "<div class=\"sender\" style=\"color:red\">[SCRAMBLE]</div> Partie terminée, remportée par @<span style=\"color:red\">" + me + "</span>: <span style=\"color:blue\">" + word_to_find + "</span>");
       clearTimeout(TimeOut);
       for (var i = 0; i < Scores.length; i++) {
-        if (i > 0 && parseInt(Scores[i][1]) > parseInt(Scores[i - 1][1]))
-        {
-          console.log("swap");
-          var tmp = Scores[i];
-          Scores[i] = Scores[i - 1];
-          Scores[i - 1] = tmp;
-        }
         if (Scores[i][0] == me)
         {
           Scores[i][1] = (parseInt(Scores[i][1]) + 1);
@@ -154,7 +147,7 @@ io.on('connection', function(socket){
       socket.emit('errorcmd', MsgScore);
     }
     else if (msg[0] == '/')
-      socket.emit('errorcmd', "<div class=\"sender\" style=\"color:red\">[SERVEUR]</div> Command unknow : <span style=\"color:blue\">" + msg + "</span>");
+      socket.emit('errorcmd', "<div class=\"sender\" style=\"color:red\">[SERVER]</div> Command unknow : <span style=\"color:blue\">" + msg + "</span>");
     else if (scramble && msg.trim().indexOf(' ') < 0 && msg.trim().length == word_to_find.length)
       io.emit('newmsg', "<div class=\"sender\">" + me + "</div><b><span class=\"glyphicon glyphicon-chevron-right btn-xs\"></span></b><span style=\"color:green\">" + msg + "</span>");
     else
