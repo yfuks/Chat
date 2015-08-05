@@ -5,7 +5,9 @@
   "author": "Yoann Fuks <yfuks@student.42.fr>",
   "dependencies": {
   	"express" : "4.x" ,
-  	"socket.io" : "*"
+  	"socket.io" : "*",
+	"fs"		: "0.x",
+	"diacritics" : "*"
   },
   "scripts" : {
   	"start" : "node js/server.js"

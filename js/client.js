@@ -5,7 +5,7 @@
 
 var me = "";
 
-/* this function is for automatic connection when the user login*/
+/* this function is for automatic connection when the user login */
 socket.on('connect', function() {
   if ($.cookie('chat'))
     socket.emit('newusr', $.cookie('chat'));
@@ -86,6 +86,7 @@ $('#mssg').keyup(function (e) {
   }
 });
 
+/* This function handle Enter and Esc for the login input */
 $('#lg_username').keyup(function (e) {
   var key = e.which;
   if(key == 13)//Enter
@@ -106,7 +107,7 @@ socket.on('newmsg', function(msg){
   d.setTime( d.getTime() - d.getTimezoneOffset()*60*1000);
   var h = d.getUTCHours();
   var m = d.getUTCMinutes();
-$('.chat-body').append("<div class=\"cell\"><div class=\"time\">" + h + ":" + m + "</div><div class=\"msg\">" + msg + "</div></div>");
+$('.chat-body').append("<div class=\"cell\"><div class=\"time\">" + h + ":" + m.toPrecision(2) + "</div><div class=\"msg\">" + msg + "</div></div>");
 });
 
 /* This function remove a user from the list when the client receive the usrdeco*/
