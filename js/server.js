@@ -46,9 +46,7 @@ io.on('connection', function(socket){
 
   /* Send all the users allready connected when the user arrive to the page */
   for (var k in users)
-  {
-    io.emit('login', users[k]);
-  }
+    socket.emit('login', users[k]);
 
   /* When a user try to sign in */
   socket.on('newusr', function(usr){
