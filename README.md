@@ -5,9 +5,9 @@ This chat is a simple javascript project
 ####Configuration
 git clone this project into your VirtualHost directory
 
-exemples:
-- `cd wamp/ && git clone https://github.com/yfuks/Chat.git www` for wamp
-- `cd mamp/apps/myApp/ && git clone https://github.com/yfuks/Chat.git htdocs` for mamp
+#####Exemples:
+- `cd wamp/ && git clone https://github.com/yfuks/Chat.git www`
+- `cd mamp/apps/myApp/ && git clone https://github.com/yfuks/Chat.git htdocs`
 
 ####Intall
 `$> npm install`
@@ -16,6 +16,6 @@ exemples:
 `$> npm start`
 
 ####Connect to the server
-exemples:
+#####Exemples:
 - http://localhost:3000
 - http://MyVirtualHost:3000
