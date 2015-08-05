@@ -1,7 +1,8 @@
 
-/* This .js handle all the callback for the client in jQuery
- Create the 29 jully 2015 by Yoann Fuks */
-
+/* 
+This .js handle all the callback for the client in jQuery
+Create the 29 jully 2015 by Yoann Fuks 
+*/
 
 var me = "";
 
@@ -25,6 +26,13 @@ socket.on('errorlog', function(){
 $('.error-msg').append("<h6>Login allready taken</h6>");
 });
 
+/* */
+socket.on('errorcmd', function(msg){
+$('.chat-body').append("<div class=\"cell\"><div class=\"msg\">" + msg + "</div></div>");
+/* Scroll to the botton of the div */
+  $('.chat-body').scrollTop($('.chat-body')[0].scrollHeight);
+});
+
 /* This function handle when an User connection is recieved */
 socket.on('login', function(usr){
     if (usr == $('#lg_username').val())
@@ -44,13 +52,9 @@ socket.on('login', function(usr){
   	if (!document.getElementById(usr))
     {
       if ($.cookie('chat') === usr || me == usr)
-      {
         $('.Users-body').append("<div class=\"cell\" id=\"" + usr + "\">" + usr + "</div>");
-      }
       else
-      {
         $('.Users-body').append("<div class=\"cell\" id=\"" + usr + "\" style=\"color:#C2C9C1\">" + usr + "</div>");
-      }
     }
 });
 
@@ -107,10 +111,14 @@ socket.on('newmsg', function(msg){
   d.setTime( d.getTime() - d.getTimezoneOffset()*60*1000);
   var h = d.getUTCHours();
   var m = d.getUTCMinutes();
-$('.chat-body').append("<div class=\"cell\"><div class=\"time\">" + h + ":" + m.toPrecision(2) + "</div><div class=\"msg\">" + msg + "</div></div>");
+  if (m.toString().length == 1)
+    m = '0' + m.toString();
+  $('.chat-body').append("<div class=\"cell\"><div class=\"time\">" + h + ":" + m + "</div><div class=\"msg\">" + msg + "</div></div>");
+  /* Scroll to the botton of the div */
+  $('.chat-body').scrollTop($('.chat-body')[0].scrollHeight);
 });
 
-/* This function remove a user from the list when the client receive the usrdeco*/
+/* This function remove a user from the list when the client receive the usrdeco */
 socket.on('usrdeco', function(usr){
 $('#' + usr).remove();
 });
