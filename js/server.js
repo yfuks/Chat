@@ -95,7 +95,7 @@ io.on('connection', function(socket){
 
       /* mix it */
       while (word_fk_up == word_to_find)
-        word_fk_up = word_to_find.split('').sort(function(){return 0.5-Math.random()}).join(' ');
+        word_fk_up = word_to_find.split('').sort(function(){return 0.5-Math.random()}).join('');
 
       /* Send a message to all client with the word to found*/
       io.emit('newmsg', "<div class=\"sender\" style=\"color:red\">[SCRAMBLE]</div> Nouvelle partie par @<span style=\"color:red\">" + me + "</span>: " + word_fk_up);
