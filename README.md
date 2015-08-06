@@ -29,4 +29,4 @@ This chat is a tiny javascript project using socket
 ##Presentation
 <a href="http://www.youtube.com/watch?feature=player_embedded&v=XYkQ5cXyASU
 " target="_blank"><img src="http://img.youtube.com/vi/XYkQ5cXyASU/0.jpg" 
-alt="IMAGE ALT TEXT HERE" width="1000" height="580" border="10" /></a>
+alt="IMAGE ALT TEXT HERE" width="700" height="580" border="10" /></a>
