@@ -23,4 +23,5 @@ This chat is a tiny javascript project using socket
 ##Commands
 - /scramble
 - /score
+- /time
 - /doacrazything
