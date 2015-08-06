@@ -25,3 +25,6 @@ This chat is a tiny javascript project using socket
 - /score
 - /time
 - /doacrazything
+
+
+[![IMAGE ALT TEXT HERE](http://img.youtube.com/vi/XYkQ5cXyASU/0.jpg)](http://www.youtube.com/watch?v=XYkQ5cXyASU)
