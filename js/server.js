@@ -162,6 +162,8 @@ io.on('connection', function(socket){
       };
       socket.emit('servmsg', MsgScore);
     }
+    else if (msg == "/doacrazything")
+      socket.emit('servmsg', "<div class=\"sender\" style=\"color:red\">[SERVER]</div> Mmmmh no.");
     else if (msg[0] == '/')
       socket.emit('servmsg', "<div class=\"sender\" style=\"color:red\">[SERVER]</div> Command unknow : <span style=\"color:blue\">" + msg + "</span>");
     else if (scramble && msg.trim().indexOf(' ') < 0 && msg.trim().length == word_to_find.length)
